@@ -2,8 +2,8 @@
 <html lang="ru" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Stars & TON Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Telegram Stars & TON Mobile Calculator</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -34,195 +34,199 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #080c14 70%);
+            background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #080c14 75%);
             min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
         }
         .glass-card {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(42, 171, 238, 0.05);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(56, 189, 248, 0.18);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 35px rgba(42, 171, 238, 0.08);
         }
         .glow-effect {
-            box-shadow: 0 0 25px rgba(42, 171, 238, 0.25);
+            box-shadow: 0 0 30px rgba(42, 171, 238, 0.3);
+        }
+        .btn-glow {
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
         }
         .glow-input:focus {
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
         }
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #080c14;
         }
         ::-webkit-scrollbar-thumb {
             background: #1e293b;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #334155;
+            border-radius: 3px;
         }
     </style>
 </head>
-<body class="text-slate-100 flex items-center justify-center p-4 sm:p-6 md:p-8">
+<body class="text-slate-100 flex items-center justify-center p-3 sm:p-6 md:p-8">
 
-    <div class="w-full max-w-2xl mx-auto">
+    <div class="w-full max-w-lg mx-auto relative">
         <!-- Floating Ambient Background Elements -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <!-- Main Card -->
-        <div class="glass-card rounded-3xl p-6 sm:p-8 relative z-10 transition-all duration-300">
+        <div class="glass-card rounded-[28px] p-5 sm:p-8 relative z-10 transition-all duration-300">
             
             <!-- Header -->
-            <div class="flex items-center justify-between mb-8 pb-6 border-b border-slate-800/80">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center glow-effect text-white text-xl sm:text-2xl shadow-lg">
+            <div class="flex items-center justify-between mb-6 pb-5 border-b border-slate-800/80">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-sky-400 to-indigo-600 flex items-center justify-center glow-effect text-white text-xl shadow-lg">
                         <i class="fa-solid fa-star"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl sm:text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-sky-200 to-sky-400 bg-clip-text text-transparent">Telegram Stars Engine</h1>
-                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Калькулятор доходности и оценки стоимости</p>
+                        <h1 class="text-lg sm:text-xl font-bold tracking-tight bg-gradient-to-r from-white via-sky-100 to-sky-300 bg-clip-text text-transparent">Telegram Stars Engine</h1>
+                        <p class="text-xs text-slate-400 mt-0.5">Мобильный калькулятор стоимости</p>
                     </div>
                 </div>
-                <!-- Quick Preset Button -->
-                <button onclick="loadPresets()" class="px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-xl text-xs font-medium text-sky-400 transition-all flex items-center space-x-1.5 cursor-pointer">
-                    <i class="fa-solid fa-bolt text-[10px]"></i>
-                    <span>Пресет</span>
-                </button>
+                <!-- Action Controls (Presets & Reset) -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="loadPresets()" title="Пресет" class="w-9 h-9 bg-slate-800/80 hover:bg-slate-700 border border-slate-700/80 rounded-xl text-sky-400 flex items-center justify-center transition-all active:scale-95 cursor-pointer">
+                        <i class="fa-solid fa-bolt text-xs"></i>
+                    </button>
+                    <button onclick="resetForm()" title="Сбросить" class="w-9 h-9 bg-slate-800/80 hover:bg-slate-700 border border-slate-700/80 rounded-xl text-slate-400 hover:text-red-400 flex items-center justify-center transition-all active:scale-95 cursor-pointer">
+                        <i class="fa-solid fa-rotate-right text-xs"></i>
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
+            <div class="space-y-4 mb-6">
                 
                 <!-- Input 1: p (Цена покупки звезд тг) -->
-                <div class="space-y-2">
-                    <label for="input-p" class="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        1. Цена покупки звезд (p)
+                <div class="space-y-1.5">
+                    <label for="input-p" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 flex justify-between">
+                        <span>1. Цена покупки звезд (p)</span>
+                        <span class="text-sky-400 font-normal normal-case">USD / шт</span>
                     </label>
                     <div class="relative rounded-2xl transition-all">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400">
                             <i class="fa-solid fa-tag text-sm"></i>
                         </div>
-                        <input type="number" id="input-p" step="any" value="0.015" placeholder="0.00" 
-                            class="w-full pl-11 pr-16 py-3.5 bg-slate-950/60 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500 glow-input text-sm sm:text-base font-medium transition-all">
-                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-xs font-semibold text-slate-500">
-                            USD / шт
-                        </div>
+                        <input type="text" inputmode="decimal" id="input-p" value="0.015" placeholder="0.00" 
+                            class="w-full pl-11 pr-4 py-3.5 bg-slate-950/70 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500 glow-input text-base font-medium transition-all">
                     </div>
                 </div>
 
                 <!-- Input 2: d (Курс рубля к доллару) -->
-                <div class="space-y-2">
-                    <label for="input-d" class="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        2. Курс рубля к доллару (d)
+                <div class="space-y-1.5">
+                    <label for="input-d" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 flex justify-between">
+                        <span>2. Курс рубля к доллару (d)</span>
+                        <span class="text-sky-400 font-normal normal-case">RUB/USD</span>
                     </label>
                     <div class="relative rounded-2xl transition-all">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400">
                             <i class="fa-solid fa-ruble-sign text-sm"></i>
                         </div>
-                        <input type="number" id="input-d" step="any" value="95.0" placeholder="0.00" 
-                            class="w-full pl-11 pr-16 py-3.5 bg-slate-950/60 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500 glow-input text-sm sm:text-base font-medium transition-all">
-                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-xs font-semibold text-slate-500">
-                            RUB/USD
-                        </div>
+                        <input type="text" inputmode="decimal" id="input-d" value="95.0" placeholder="0.00" 
+                            class="w-full pl-11 pr-4 py-3.5 bg-slate-950/70 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500 glow-input text-base font-medium transition-all">
                     </div>
                 </div>
 
                 <!-- Input 3: s (Кол-во звезд) -->
-                <div class="space-y-2">
-                    <label for="input-s" class="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        3. Количество звезд (s)
+                <div class="space-y-1.5">
+                    <label for="input-s" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 flex justify-between">
+                        <span>3. Количество звезд (s)</span>
+                        <span class="text-sky-400 font-normal normal-case">STARS</span>
                     </label>
                     <div class="relative rounded-2xl transition-all">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400">
                             <i class="fa-solid fa-coins text-sm"></i>
                         </div>
-                        <input type="number" id="input-s" step="any" value="1000" placeholder="0" 
-                            class="w-full pl-11 pr-16 py-3.5 bg-slate-950/60 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500 glow-input text-sm sm:text-base font-medium transition-all">
-                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-xs font-semibold text-slate-500">
-                            STARS
-                        </div>
+                        <input type="text" inputmode="decimal" id="input-s" value="1000" placeholder="0" 
+                            class="w-full pl-11 pr-4 py-3.5 bg-slate-950/70 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500 glow-input text-base font-medium transition-all">
                     </div>
                 </div>
 
-                <!-- Input 4: g (Цена TON/Грам к доллару) -->
-                <div class="space-y-2">
-                    <label for="input-g" class="block text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        4. Цена TON / Грам (g)
+                <!-- Input 4: g (Цена TON / Gram к доллару) -->
+                <div class="space-y-1.5">
+                    <label for="input-g" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 flex justify-between">
+                        <span>4. Цена TON / Gram (g)</span>
+                        <span class="text-sky-400 font-normal normal-case">USD / TON</span>
                     </label>
                     <div class="relative rounded-2xl transition-all">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400">
                             <i class="fa-solid fa-gem text-sm"></i>
                         </div>
-                        <input type="number" id="input-g" step="any" value="5.50" placeholder="0.00" 
-                            class="w-full pl-11 pr-16 py-3.5 bg-slate-950/60 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500 glow-input text-sm sm:text-base font-medium transition-all">
-                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-xs font-semibold text-slate-500">
-                            USD / TON
-                        </div>
+                        <input type="text" inputmode="decimal" id="input-g" value="5.50" placeholder="0.00" 
+                            class="w-full pl-11 pr-4 py-3.5 bg-slate-950/70 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500 glow-input text-base font-medium transition-all">
                     </div>
                 </div>
 
             </div>
 
-            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sky-950/40 via-slate-900/60 to-indigo-950/40 border border-sky-500/20 p-6 sm:p-8">
-                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="mb-6">
+                <button onclick="calculate()" class="w-full py-4 px-6 bg-gradient-to-r from-sky-400 via-sky-500 to-indigo-600 hover:from-sky-300 hover:to-indigo-500 text-slate-950 font-bold text-base rounded-2xl btn-glow transition-all active:scale-[0.98] flex items-center justify-center space-x-2.5 cursor-pointer">
+                    <i class="fa-solid fa-calculator text-lg"></i>
+                    <span>Подсчитать</span>
+                </button>
+            </div>
 
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-950/50 via-slate-900/70 to-indigo-950/50 border border-sky-500/25 p-5 sm:p-6">
+                <div class="absolute top-0 right-0 -mt-6 -mr-6 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="flex items-center justify-between gap-2 mb-3">
                     <div>
-                        <span class="text-xs font-semibold uppercase tracking-wider text-sky-400/80">Результат расчета по формуле</span>
-                        <div class="text-xs text-slate-500 mt-0.5">Формула: ((p × d × s) / g)<sup>0.98</sup></div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-sky-400">Результат расчета</span>
+                        <div class="text-[10px] text-slate-400 mt-0.5">Формула: ((p × d × s) / g)<sup>0.98</sup></div>
                     </div>
                     <!-- Copy Button -->
-                    <button onclick="copyResult()" id="copy-btn" class="self-start sm:self-auto px-4 py-2 bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-sky-500/20 flex items-center space-x-2 cursor-pointer active:scale-95">
+                    <button onclick="copyResult()" id="copy-btn" class="px-3.5 py-2 bg-sky-500/20 hover:bg-sky-500/30 border border-sky-500/40 text-sky-300 font-semibold text-xs rounded-xl transition-all flex items-center space-x-1.5 cursor-pointer active:scale-95">
                         <i class="fa-regular fa-copy"></i>
-                        <span id="copy-text">Копировать результат</span>
+                        <span>Копировать</span>
                     </button>
                 </div>
 
                 <!-- Main Output Value -->
-                <div class="my-4">
-                    <div id="result-value" class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white drop-shadow-md">
+                <div class="my-2">
+                    <div id="result-value" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white drop-shadow">
                         0.00
                     </div>
                 </div>
 
                 <!-- Intermediate Metrics Breakdown -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-slate-800/80 mt-6 text-xs">
+                <div class="grid grid-cols-3 gap-2 pt-3 border-t border-slate-800/80 mt-4 text-[11px]">
                     <div>
-                        <span class="text-slate-500 block">Базовая сумма (p*d*s):</span>
-                        <span id="sub-base" class="font-semibold text-slate-300 text-sm">0.00</span>
+                        <span class="text-slate-500 block truncate">p*d*s:</span>
+                        <span id="sub-base" class="font-semibold text-slate-200 text-xs truncate block">0.00</span>
                     </div>
                     <div>
-                        <span class="text-slate-500 block">С учетом деления на g:</span>
-                        <span id="sub-div" class="font-semibold text-slate-300 text-sm">0.00</span>
+                        <span class="text-slate-500 block truncate">Деление на g:</span>
+                        <span id="sub-div" class="font-semibold text-slate-200 text-xs truncate block">0.00</span>
                     </div>
                     <div>
-                        <span class="text-slate-500 block">Коэффициент (^0.98):</span>
-                        <span id="sub-pow" class="font-semibold text-slate-300 text-sm">0.98</span>
+                        <span class="text-slate-500 block truncate">Степень ^0.98:</span>
+                        <span id="sub-pow" class="font-semibold text-slate-200 text-xs truncate block">0.98</span>
                     </div>
                 </div>
             </div>
 
             <!-- Footer Note -->
-            <div class="mt-6 text-center text-xs text-slate-500">
-                Telegram Stars Valuation System • Real-time calculation engine
+            <div class="mt-5 text-center text-[11px] text-slate-500">
+                Telegram Stars & TON Ecosystem • Optimized for Mobile
             </div>
 
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 border border-sky-500/40 text-slate-100 px-4 py-3 rounded-2xl shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3 z-50">
-        <div class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs">
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 bg-slate-900 border border-sky-500/40 text-slate-100 px-4 py-3 rounded-2xl shadow-2xl transform translate-y-28 opacity-0 transition-all duration-300 flex items-center space-x-3 z-50">
+        <div class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs flex-shrink-0">
             <i class="fa-solid fa-check"></i>
         </div>
-        <span id="toast-msg" class="text-sm font-medium">Результат скопирован в буфер обмена!</span>
+        <span id="toast-msg" class="text-xs sm:text-sm font-medium whitespace-nowrap">Результат скопирован!</span>
     </div>
 
     <script>
-        // Get DOM elements
+        // DOM elements
         const inputP = document.getElementById('input-p');
         const inputD = document.getElementById('input-d');
         const inputS = document.getElementById('input-s');
@@ -235,11 +239,19 @@
 
         let lastCalculatedResult = '0.00';
 
+        // Helper to parse decimal values correctly with commas or dots
+        function parseVal(valueStr) {
+            if (!valueStr) return 0;
+            const normalized = String(valueStr).replace(',', '.');
+            const num = parseFloat(normalized);
+            return isNaN(num) ? 0 : num;
+        }
+
         function calculate() {
-            const p = parseFloat(inputP.value) || 0;
-            const d = parseFloat(inputD.value) || 0;
-            const s = parseFloat(inputS.value) || 0;
-            const g = parseFloat(inputG.value) || 0;
+            const p = parseVal(inputP.value);
+            const d = parseVal(inputD.value);
+            const s = parseVal(inputS.value);
+            const g = parseVal(inputG.value);
 
             // Intermediate metrics
             const baseVal = p * d * s;
@@ -265,6 +277,14 @@
             resultValueEl.textContent = formatNumber(finalResult);
             subBaseEl.textContent = baseVal.toLocaleString('ru-RU', {maximumFractionDigits: 2});
             subDivEl.textContent = divVal.toLocaleString('ru-RU', {maximumFractionDigits: 2});
+
+            // Trigger subtle animation on result box
+            resultValueEl.classList.add('scale-105', 'text-sky-300');
+            setTimeout(() => {
+                resultValueEl.classList.remove('scale-105', 'text-sky-300');
+            }, 200);
+
+            showToast('Расчет успешно выполнен!');
         }
 
         function formatNumber(num) {
@@ -284,16 +304,31 @@
             inputS.value = '5000';
             inputG.value = '5.80';
             calculate();
-            showToast('Загружен новый пресет данных!');
+            showToast('Пресет загружен!');
+        }
+
+        function resetForm() {
+            inputP.value = '';
+            inputD.value = '';
+            inputS.value = '';
+            inputG.value = '';
+            resultValueEl.textContent = '0.00';
+            subBaseEl.textContent = '0.00';
+            subDivEl.textContent = '0.00';
+            lastCalculatedResult = '0.00';
+            showToast('Форма очищена');
         }
 
         function copyResult() {
-            if (!lastCalculatedResult || lastCalculatedResult === '0.00') return;
+            if (!lastCalculatedResult || lastCalculatedResult === '0.00') {
+                showToast('Нет данных для копирования');
+                return;
+            }
             
-            // Fallback copy method for iframe compatibility
+            // Fallback copy method for iframe and mobile compatibility
             const textArea = document.createElement("textarea");
             textArea.value = lastCalculatedResult;
-            textArea.style.position = "fixed";  // Avoid scrolling to bottom
+            textArea.style.position = "fixed";
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
@@ -301,12 +336,12 @@
             try {
                 const successful = document.execCommand('copy');
                 if (successful) {
-                    showToast('Результат (' + lastCalculatedResult + ') скопирован!');
+                    showToast('Скопировано: ' + lastCalculatedResult);
                 } else {
-                    showToast('Не удалось скопировать.');
+                    showToast('Не удалось скопировать');
                 }
             } catch (err) {
-                showToast('Ошибка копирования.');
+                showToast('Ошибка копирования');
             }
 
             document.body.removeChild(textArea);
@@ -315,15 +350,20 @@
         function showToast(msg) {
             const msgEl = document.getElementById('toast-msg');
             msgEl.textContent = msg;
-            toastEl.classList.remove('translate-y-24', 'opacity-0');
+            toastEl.classList.remove('translate-y-28', 'opacity-0');
             setTimeout(() => {
-                toastEl.classList.add('translate-y-24', 'opacity-0');
-            }, 3000);
+                toastEl.classList.add('translate-y-28', 'opacity-0');
+            }, 2500);
         }
 
-        // Attach event listeners for real-time calculation
+        // Allow pressing Enter in inputs to calculate
         [inputP, inputD, inputS, inputG].forEach(input => {
-            input.addEventListener('input', calculate);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    input.blur();
+                    calculate();
+                }
+            });
         });
 
         // Initial calculation on load
